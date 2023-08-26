@@ -1,17 +1,32 @@
 #include <iostream>
 #include <windows.h>
 
-const int ALT_KEY {VK_LMENU};
+const int MIN_DELAY {20};
+const int START_KEY {VK_LMENU};
 const int EXIT_KEY {VK_ESCAPE};
-int clickDelay {};
+
+bool isAltKeyPressed()
+{
+    return GetAsyncKeyState(START_KEY) & 0x8000;
+}
+
+bool isExitKeyPressed()
+{
+    return GetAsyncKeyState(EXIT_KEY);
+}
 
 int main()
 {
     SetConsoleTitleA("Auto Clicker");
     std::cout << "| Welcome to my 'Auto Clicker'!" << std::endl;
     std::cout << "\n| L Alt  --> Toggle clicking\n| Escape --> Exit the program" << std::endl;
-    std::cout << "Enter a click delay (ms): ";
-    std::cin >> clickDelay;
+
+    int clickDelay;
+    do
+    {
+        std::cout << "Enter a click delay (ms, >=" << MIN_DELAY << ")\n-> ";
+        std::cin >> clickDelay;
+    } while (clickDelay < MIN_DELAY || std::cin.fail() || clickDelay > INT_MAX);
 
     bool clicking {false};
     bool prevAltState {false};
@@ -19,14 +34,14 @@ int main()
 
     while (true)
     {
-        bool currAltState = GetAsyncKeyState(ALT_KEY) & 0x8000;
+        bool currAltState = isAltKeyPressed();
 
         if (currAltState && !prevAltState)
         {
             clicking = !clicking;
         }
 
-        else if (GetAsyncKeyState(EXIT_KEY))
+        if (isExitKeyPressed())
         {
             return 0;
         }
