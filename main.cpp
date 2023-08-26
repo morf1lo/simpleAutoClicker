@@ -1,18 +1,21 @@
 #include <iostream>
 #include <windows.h>
 
-const int CLICK_DELAY {20};
 const int ALT_KEY {VK_LMENU};
 const int EXIT_KEY {VK_ESCAPE};
+int clickDelay {};
 
 int main()
 {
     SetConsoleTitleA("Auto Clicker");
     std::cout << "| Welcome to my 'Auto Clicker'!" << std::endl;
     std::cout << "\n| L Alt  --> Toggle clicking\n| Escape --> Exit the program" << std::endl;
+    std::cout << "Enter a click delay (ms): ";
+    std::cin >> clickDelay;
 
     bool clicking {false};
     bool prevAltState {false};
+    DWORD lastClickTime {};
 
     while (true)
     {
@@ -30,11 +33,11 @@ int main()
 
         prevAltState = currAltState;
 
-        if (clicking)
+        if (clicking && GetTickCount() - lastClickTime >= clickDelay)
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-            Sleep(CLICK_DELAY);
+            lastClickTime = GetTickCount();
         }
     }
 
