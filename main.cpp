@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <windows.h>
 
 const int MIN_DELAY {20};
@@ -22,10 +23,15 @@ int main()
     std::cout << "\n| L Alt  --> Toggle clicking\n| Escape --> Exit the program" << std::endl;
 
     int clickDelay;
+    std::string input;
     do
     {
         std::cout << "Enter a click delay (ms, >=" << MIN_DELAY << ")\n-> ";
-        std::cin >> clickDelay;
+        std::getline(std::cin, input);
+
+        std::stringstream ss(input);
+        ss >> clickDelay;
+
     } while (clickDelay < MIN_DELAY || std::cin.fail() || clickDelay > INT_MAX);
 
     bool clicking {false};
