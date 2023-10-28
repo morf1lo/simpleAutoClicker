@@ -1,1 +1,1 @@
-A very simple Auto Clicker written in C++
+A very simple Auto Clicker written in C+
