@@ -1,1 +1,1 @@
-Simple Auto Clicker written in C++
+Simple autoclicker for Windows written in C++
