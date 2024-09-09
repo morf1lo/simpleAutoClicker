@@ -20,7 +20,7 @@ bool isExitKeyPressed()
 int main()
 {
     SetConsoleTitleA("Auto Clicker");
-    std::cout << "| Welcome to my 'Auto Clicker'!" << std::endl;
+    std::cout << "| Welcome to my Autoclicker!" << std::endl;
     std::cout << "\n| L Alt  --> Toggle clicking\n| R Shift --> Exit the program" << std::endl;
 
     int clickDelay;
