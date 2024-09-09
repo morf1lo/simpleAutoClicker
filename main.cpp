@@ -1,10 +1,11 @@
 #include <iostream>
 #include <sstream>
 #include <windows.h>
+#include <climits>
 
-const int MIN_DELAY {20};
+const float MIN_DELAY {1};
 const int START_KEY {VK_LMENU};
-const int EXIT_KEY {VK_ESCAPE};
+const int EXIT_KEY {VK_RSHIFT};
 
 bool isAltKeyPressed()
 {
@@ -20,7 +21,7 @@ int main()
 {
     SetConsoleTitleA("Auto Clicker");
     std::cout << "| Welcome to my 'Auto Clicker'!" << std::endl;
-    std::cout << "\n| L Alt  --> Toggle clicking\n| Escape --> Exit the program" << std::endl;
+    std::cout << "\n| L Alt  --> Toggle clicking\n| R Shift --> Exit the program" << std::endl;
 
     int clickDelay;
     std::string input;
